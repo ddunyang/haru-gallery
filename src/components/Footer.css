@@ -1,13 +1,15 @@
 .footer {
-  background: linear-gradient(135deg, #fbbf24 0%, #f9a8d4 100%);
-  padding: 1.5rem 1rem;
+  background: var(--color-dark);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 2rem 2.5rem;
   text-align: center;
 }
 
 .footer-text {
   margin: 0;
-  color: rgba(255, 255, 255, 0.95);
-  font-weight: 600;
-  font-size: 1rem;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.2);
+  font-weight: 300;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }

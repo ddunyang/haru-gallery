@@ -7,7 +7,13 @@ const BASE_URL = import.meta.env.BASE_URL;
 function PhotoGallery() {
   return (
     <section className="photo-gallery">
-      <h2 className="section-title">📷 사진 갤러리</h2>
+      <div className="section-header">
+        <span className="section-label">Photos</span>
+        <div className="section-line" />
+        {photos.length > 0 && (
+          <span className="section-count">{photos.length}</span>
+        )}
+      </div>
       {photos.length === 0 ? (
         <EmptyState />
       ) : (
@@ -31,10 +37,12 @@ function PhotoGallery() {
                     }
                   }}
                 />
+                {photo.caption && (
+                  <div className="photo-overlay">
+                    <p className="photo-caption">{photo.caption}</p>
+                  </div>
+                )}
               </div>
-              {photo.caption && (
-                <p className="photo-caption">{photo.caption}</p>
-              )}
             </div>
           ))}
         </div>

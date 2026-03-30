@@ -3,11 +3,18 @@
 }
 
 :root {
-  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', system-ui, -apple-system, sans-serif;
+  --color-bg: #ffffff;
+  --color-dark: #0c0c0c;
+  --color-text: #0c0c0c;
+  --color-text-muted: #888888;
+  --grid-gap-flush: 3px;
+  --color-surface: #f7f7f7;
+
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', system-ui, -apple-system, sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  color: #1f2937;
-  background: #f9fafb;
+  color: var(--color-text);
+  background: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -34,5 +41,36 @@ img {
 
 h1, h2, h3 {
   margin-top: 0;
-  line-height: 1.25;
+  line-height: 1.15;
+}
+
+/* Shared section header — used in both gallery sections */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.section-count {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  white-space: nowrap;
 }
