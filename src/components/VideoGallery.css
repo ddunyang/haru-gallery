@@ -35,13 +35,14 @@
   background: #111827;
 }
 
-.video-wrapper iframe {
+.video-wrapper video {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   border: none;
+  background: #111827;
 }
 
 .video-caption {
@@ -51,6 +52,19 @@
   font-weight: 500;
   margin: 0;
   text-align: center;
+}
+
+.video-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 0.8rem;
+  color: #9ca3af;
+  text-align: center;
+  padding: 0.5rem;
+  margin: 0;
 }
 
 /* reuse section-title from PhotoGallery style */
