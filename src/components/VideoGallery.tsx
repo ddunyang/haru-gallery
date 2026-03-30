@@ -8,9 +8,15 @@ function VideoGallery() {
   return (
     <section className="video-gallery">
       <div className="video-gallery-inner">
-        <h2 className="section-title">🎬 영상 갤러리</h2>
+        <div className="section-header">
+          <span className="section-label">Videos</span>
+          <div className="section-line" />
+          {videos.length > 0 && (
+            <span className="section-count">{videos.length}</span>
+          )}
+        </div>
         {videos.length === 0 ? (
-          <EmptyState />
+          <EmptyState dark />
         ) : (
           <div className="video-grid">
             {videos.map((video) => (

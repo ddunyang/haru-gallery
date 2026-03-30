@@ -1,8 +1,12 @@
 import './EmptyState.css';
 
-function EmptyState() {
+interface EmptyStateProps {
+  dark?: boolean;
+}
+
+function EmptyState({ dark = false }: EmptyStateProps) {
   return (
-    <div className="empty-state">
+    <div className={`empty-state${dark ? ' empty-state--dark' : ''}`}>
       <svg
         className="empty-state-dog"
         viewBox="0 0 200 200"
