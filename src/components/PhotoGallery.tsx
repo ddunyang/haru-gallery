@@ -92,6 +92,8 @@ function PhotoGallery() {
             className="photo-modal-close"
             onClick={closeModal}
             aria-label="닫기"
+            // eslint-disable-next-line jsx-a11y/no-autofocus
+            autoFocus
           >
             ✕
           </button>
