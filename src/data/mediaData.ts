@@ -15,6 +15,7 @@ export interface Photo {
 }
 
 export const photos: Photo[] = [
+  { id: 1, filename: 'IMG_1652.JPG', alt: '하루', caption: '🐾 하루의 산책' },
   // 여기에 사진 정보를 추가하세요.
 ];
 
