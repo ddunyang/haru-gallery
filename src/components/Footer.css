@@ -1,13 +1,13 @@
 .footer {
   background: var(--color-dark);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(255, 220, 190, 0.08);
   padding: 2rem 2.5rem;
   text-align: center;
 }
 
 .footer-text {
   margin: 0;
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 230, 210, 0.28);
   font-weight: 300;
   font-size: 0.7rem;
   letter-spacing: 0.12em;
