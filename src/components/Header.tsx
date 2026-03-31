@@ -7,7 +7,7 @@ function Header() {
       <div className="header-inner">
         <span className="header-eyebrow">Dog Gallery</span>
         <div className="header-title-row">
-          <DogCharacter className="header-dog" size={56} />
+          <DogCharacter className="header-dog" size={84} />
           <h1 className="header-title">하루 갤러리</h1>
         </div>
         <div className="header-divider" />
