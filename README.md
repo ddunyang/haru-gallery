@@ -1,73 +1,58 @@
-# React + TypeScript + Vite
+# 🐾 하루 갤러리
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+사랑스러운 강아지 **하루** (래브라도 리트리버 × 진돗개 믹스, 2025년 7월 17일생 ♀)의 사진과 진료 기록을 한곳에 모아둔 개인 갤러리 웹사이트입니다.
 
-Currently, two official plugins are available:
+## 주요 기능
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **프로필 카드** — 하루의 생일, 나이(년·월·일 및 생후 일수)를 실시간으로 표시합니다.
+- **포토 갤러리** — Notion에 업로드된 사진을 빌드 시 자동으로 가져와 갤러리로 보여 줍니다.
+- **진료 기록** — Notion에 기록된 병원 방문 이력(날짜 + 제목)을 최신순으로 나열합니다.
 
-## React Compiler
+## 기술 스택
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| 구분 | 기술 |
+|------|------|
+| 프레임워크 | [React 19](https://react.dev/) |
+| 언어 | TypeScript |
+| 빌드 도구 | [Vite](https://vite.dev/) |
+| 데이터 소스 | [Notion API](https://developers.notion.com/) (`@notionhq/client`) |
+| 배포 | GitHub Pages (`JamesIves/github-pages-deploy-action`) |
 
-## Expanding the ESLint configuration
+## 데이터 흐름
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+사진과 진료 기록은 **빌드 타임**에 Notion에서 가져옵니다.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+Notion DB (사진)       ──┐
+                          ├─▶ scripts/fetchNotionData.mjs ──▶ src/data/mediaData.ts ──▶ Vite 빌드
+Notion DB (진료 기록)  ──┘                                     public/haru/photos/
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. `scripts/fetchNotionData.mjs` 가 Notion API를 호출해 두 개의 데이터베이스를 조회합니다.
+   - **사진 DB** — 각 페이지의 이미지 블록을 다운로드해 `public/haru/photos/` 에 저장합니다.
+   - **진료 기록 DB** — 날짜·제목 속성을 추출합니다.
+2. 수집한 데이터를 `src/data/mediaData.ts` 로 내보냅니다.
+3. Vite가 해당 파일을 포함해 정적 사이트를 빌드합니다.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 자동 배포
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+GitHub Actions 워크플로우(`deploy.yml`)가 아래 조건에서 자동으로 빌드·배포를 실행합니다.
+
+- `main` 브랜치 푸시
+- **30분 간격** 정기 실행 (Notion의 최신 데이터 반영)
+- 수동 트리거 (`workflow_dispatch`)
+
+빌드 실패 또는 경고가 발생하면 리포지토리에 GitHub Issue가 자동으로 생성됩니다.
+
+## 로컬 실행
+
+```bash
+# 의존성 설치
+npm install
+
+# Notion 토큰 설정 후 개발 서버 실행
+NOTION_TOKEN=<your_token> npm run build   # 데이터 fetch + 빌드
+npm run dev                               # 개발 서버 (http://localhost:5173)
 ```
+
+> `NOTION_TOKEN` 환경 변수에 Notion Internal Integration Secret을 설정해야 합니다.
