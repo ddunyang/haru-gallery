@@ -3,12 +3,13 @@
 }
 
 :root {
-  --color-bg: #ffffff;
-  --color-dark: #0c0c0c;
-  --color-text: #0c0c0c;
-  --color-text-muted: #888888;
+  --color-bg: #fffcf8;
+  --color-dark: #8c6352;
+  --color-text: #4d3b30;
+  --color-text-muted: #b09080;
   --grid-gap-flush: 3px;
-  --color-surface: #f7f7f7;
+  --color-surface: #f7f2ea;
+  --color-border: #e8ddd0;
 
   font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', system-ui, -apple-system, sans-serif;
   font-size: 16px;
