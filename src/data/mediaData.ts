@@ -8,16 +8,13 @@
 // ============================================================
 
 export interface Photo {
-  id: number;
+  id: string;
   filename: string;
   alt: string;
   caption?: string;
 }
 
-export const photos: Photo[] = [
-  { id: 1, filename: 'IMG_1652.JPG', alt: '하루', caption: '🐾 하루의 산책' },
-  // 여기에 사진 정보를 추가하세요.
-];
+export const photos: Photo[] = [];
 
 // ============================================================
 // 🎬 영상 등록 방법
@@ -25,16 +22,15 @@ export const photos: Photo[] = [
 //   2. 아래 videos 배열에 항목을 추가하세요.
 //
 // 예시:
-//   { id: 1, filename: 'video1.mp4', title: '하루 영상', caption: '🎬 하루의 하루' },
+//   { id: '1', filename: 'video1.mp4', title: '하루 영상', caption: '🎬 하루의 하루' },
 // ============================================================
 
 export interface Video {
-  id: number;
+  id: string;
   filename: string;
   title: string;
   caption?: string;
 }
 
-export const videos: Video[] = [
-  // 여기에 영상 정보를 추가하세요.
-];
+export const videos: Video[] = [];
+
