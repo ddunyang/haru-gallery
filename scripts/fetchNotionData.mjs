@@ -52,8 +52,8 @@ async function fetchAllPages(databaseId) {
   const pages = [];
   let cursor = undefined;
   do {
-    const res = await notion.dataSources.query({
-      data_source_id: databaseId,
+    const res = await notion.databases.query({
+      database_id: databaseId,
       start_cursor: cursor,
       page_size: 100,
     });
