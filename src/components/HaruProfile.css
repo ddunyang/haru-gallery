@@ -1,0 +1,98 @@
+.haru-profile {
+  background: var(--color-dark);
+  border-bottom: 1px solid rgba(255, 225, 195, 0.08);
+}
+
+.haru-profile-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2.75rem 2.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.haru-profile-avatar {
+  font-size: 2.25rem;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+  opacity: 0.85;
+}
+
+.haru-profile-name {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.haru-profile-gender {
+  font-size: 1.1rem;
+  color: #f9a8c9;
+  font-weight: 400;
+}
+
+.haru-profile-breed {
+  font-size: 0.8rem;
+  color: rgba(255, 235, 215, 0.5);
+  margin: 0.15rem 0 0;
+  letter-spacing: 0.04em;
+  font-weight: 300;
+}
+
+.haru-profile-stats {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 1.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 225, 195, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.haru-profile-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.9rem 2rem;
+}
+
+.haru-profile-stat-divider {
+  width: 1px;
+  height: 2.5rem;
+  background: rgba(255, 225, 195, 0.12);
+  flex-shrink: 0;
+}
+
+.haru-profile-stat-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 235, 215, 0.4);
+  font-weight: 500;
+}
+
+.haru-profile-stat-value {
+  font-size: 0.9rem;
+  color: rgba(255, 240, 225, 0.85);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 480px) {
+  .haru-profile-stat {
+    padding: 0.8rem 1.25rem;
+  }
+
+  .haru-profile-stat-value {
+    font-size: 0.8rem;
+  }
+}
