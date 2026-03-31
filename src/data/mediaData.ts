@@ -17,20 +17,16 @@ export interface Photo {
 export const photos: Photo[] = [];
 
 // ============================================================
-// 🎬 영상 등록 방법
-//   1. public/haru/videos/ 폴더에 영상 파일을 넣으세요.
-//   2. 아래 videos 배열에 항목을 추가하세요.
-//
-// 예시:
-//   { id: '1', filename: 'video1.mp4', title: '하루 영상', caption: '🎬 하루의 하루' },
+// 🏥 진료기록 등록 방법
+//   Notion DB (334fb4c819b380369703fb51bf261229)에서 자동으로 불러옵니다.
+//   date(날짜)와 title(제목) 필드를 사용합니다.
 // ============================================================
 
-export interface Video {
+export interface MedicalRecord {
   id: string;
-  filename: string;
+  date: string;
   title: string;
-  caption?: string;
 }
 
-export const videos: Video[] = [];
+export const medicalRecords: MedicalRecord[] = [];
 
