@@ -9,6 +9,7 @@ import { Client } from '@notionhq/client';
 import { writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import sharp from 'sharp';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -25,6 +26,10 @@ const MEDICAL_DB_ID =
   process.env.NOTION_MEDICAL_DB_ID ?? '334fb4c819b380369703fb51bf261229';
 
 const PHOTOS_DIR = join(__dirname, '../public/haru/photos');
+const THUMBNAILS_DIR = join(PHOTOS_DIR, 'thumbnails');
+
+/** Max width/height for thumbnail images (px). */
+const THUMBNAIL_SIZE = 400;
 
 const notion = new Client({ auth: NOTION_TOKEN });
 
@@ -38,6 +43,24 @@ async function downloadFile(url, filepath) {
   if (!res.ok) throw new Error(`Failed to download ${url}: ${res.statusText}`);
   const buffer = await res.arrayBuffer();
   writeFileSync(filepath, Buffer.from(buffer));
+}
+
+/**
+ * Generate a thumbnail (WebP, max THUMBNAIL_SIZE px on longest side) from
+ * the source file, saving it to THUMBNAILS_DIR with a `.webp` extension.
+ * Skips generation if the thumbnail already exists.
+ */
+async function generateThumbnail(srcPath, thumbFilename) {
+  const thumbPath = join(THUMBNAILS_DIR, thumbFilename);
+  if (existsSync(thumbPath)) {
+    console.log(`  Thumbnail exists, skipping: ${thumbFilename}`);
+    return;
+  }
+  await sharp(srcPath)
+    .resize(THUMBNAIL_SIZE, THUMBNAIL_SIZE, { fit: 'inside', withoutEnlargement: true })
+    .webp({ quality: 80 })
+    .toFile(thumbPath);
+  console.log(`  Thumbnail generated: ${thumbFilename}`);
 }
 
 /** Extract the file extension from a URL path, defaulting to 'jpg'. */
@@ -106,9 +129,13 @@ async function processPage(page) {
   console.log(`Downloading: ${filename}`);
   await downloadFile(imageUrl, filepath);
 
+  const thumbFilename = `photo_${page.id.replace(/-/g, '')}_thumb.webp`;
+  await generateThumbnail(filepath, thumbFilename);
+
   return {
     id: page.id,
     filename,
+    thumbnail: `thumbnails/${thumbFilename}`,
     alt: caption || '하루',
     ...(caption ? { caption } : {}),
   };
@@ -116,6 +143,7 @@ async function processPage(page) {
 
 async function fetchPhotos() {
   mkdirSync(PHOTOS_DIR, { recursive: true });
+  mkdirSync(THUMBNAILS_DIR, { recursive: true });
 
   const pages = await fetchAllPages(PHOTO_DB_ID);
   console.log(`Found ${pages.length} pages in Notion photo DB.`);
@@ -189,6 +217,7 @@ async function main() {
 export interface Photo {
   id: string;
   filename: string;
+  thumbnail: string;
   alt: string;
   caption?: string;
 }
