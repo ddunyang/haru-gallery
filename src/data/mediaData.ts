@@ -10,6 +10,7 @@
 export interface Photo {
   id: string;
   filename: string;
+  thumbnail: string;
   alt: string;
   caption?: string;
 }

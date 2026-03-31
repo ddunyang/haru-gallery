@@ -53,7 +53,7 @@ function PhotoGallery() {
               >
                 <div className="photo-wrapper">
                   <img
-                    src={`${BASE_URL}haru/photos/${photo.filename}`}
+                    src={`${BASE_URL}haru/photos/${photo.thumbnail}`}
                     alt={photo.alt}
                     loading="lazy"
                     onError={(e) => {
