@@ -16,20 +16,20 @@ function DogCharacter({ size = 110, className }: DogCharacterProps) {
       {/* Tail */}
       <path
         d="M 148 138 Q 176 115 170 92"
-        stroke="#E59866"
+        stroke="#DDD0BC"
         strokeWidth="11"
         fill="none"
         strokeLinecap="round"
       />
       {/* Body */}
-      <ellipse cx="100" cy="148" rx="52" ry="42" fill="#F5CBA7" />
+      <ellipse cx="100" cy="148" rx="52" ry="42" fill="#F5EFE2" />
       {/* Left ear (behind head) */}
       <ellipse
         cx="63"
         cy="62"
         rx="17"
         ry="28"
-        fill="#E59866"
+        fill="#DDD0BC"
         transform="rotate(-15 63 62)"
       />
       {/* Right ear (behind head) */}
@@ -38,11 +38,11 @@ function DogCharacter({ size = 110, className }: DogCharacterProps) {
         cy="62"
         rx="17"
         ry="28"
-        fill="#E59866"
+        fill="#DDD0BC"
         transform="rotate(15 137 62)"
       />
       {/* Head */}
-      <circle cx="100" cy="88" r="44" fill="#F5CBA7" />
+      <circle cx="100" cy="88" r="44" fill="#F5EFE2" />
       {/* Left eye */}
       <circle cx="84" cy="82" r="7" fill="#2C3E50" />
       {/* Right eye */}
@@ -62,9 +62,9 @@ function DogCharacter({ size = 110, className }: DogCharacterProps) {
         strokeLinecap="round"
       />
       {/* Left front leg */}
-      <rect x="72" y="178" width="17" height="18" rx="8" fill="#F5CBA7" />
+      <rect x="72" y="178" width="17" height="18" rx="8" fill="#F5EFE2" />
       {/* Right front leg */}
-      <rect x="111" y="178" width="17" height="18" rx="8" fill="#F5CBA7" />
+      <rect x="111" y="178" width="17" height="18" rx="8" fill="#F5EFE2" />
     </svg>
   );
 }
