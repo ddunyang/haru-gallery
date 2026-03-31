@@ -22,6 +22,18 @@
   margin-bottom: 1.25rem;
 }
 
+.header-title-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.header-dog {
+  opacity: 0.85;
+  flex-shrink: 0;
+}
+
 .header-title {
   font-size: clamp(2.8rem, 6vw, 5.5rem);
   font-weight: 300;
