@@ -29,11 +29,54 @@
   gap: 0.6em;
 }
 
+/* Wrapper receives the position transform from JS; must not have its own animation */
+.header-dog-wrapper {
+  flex-shrink: 0;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.header-dog-wrapper:active {
+  cursor: grabbing;
+}
+
 .header-dog {
   opacity: 0.85;
-  flex-shrink: 0;
+  display: block;
+}
+
+/* Wag in idle state */
+.header-dog--wag {
   animation: wag 2s ease-in-out infinite;
   transform-origin: center bottom;
+}
+
+/* Chewing bounce in eating state */
+.header-dog--eating {
+  animation: chew 0.35s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+@keyframes wag {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes chew {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-6px) rotate(1deg); }
+}
+
+/* Treat bone that follows the cursor */
+.dog-treat {
+  animation: treat-float 0.55s ease-in-out infinite;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25));
+}
+
+@keyframes treat-float {
+  0%, 100% { transform: translate(-50%, -50%) rotate(-6deg) scale(1); }
+  50%       { transform: translate(-50%, -62%) rotate(6deg) scale(1.08); }
 }
 
 .header-title {
