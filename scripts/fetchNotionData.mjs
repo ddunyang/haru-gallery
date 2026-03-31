@@ -57,6 +57,7 @@ async function generateThumbnail(srcPath, thumbFilename) {
     return;
   }
   await sharp(srcPath)
+    .rotate()
     .resize(THUMBNAIL_SIZE, THUMBNAIL_SIZE, { fit: 'inside', withoutEnlargement: true })
     .webp({ quality: 80 })
     .toFile(thumbPath);
