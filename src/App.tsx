@@ -2,7 +2,7 @@ import './App.css';
 import Header from './components/Header';
 import HaruProfile from './components/HaruProfile';
 import PhotoGallery from './components/PhotoGallery';
-import VideoGallery from './components/VideoGallery';
+import MedicalRecords from './components/MedicalRecords';
 import Footer from './components/Footer';
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       <HaruProfile />
       <main>
         <PhotoGallery />
-        <VideoGallery />
+        <MedicalRecords />
       </main>
       <Footer />
     </>
