@@ -39,6 +39,8 @@
 /* Wrapper receives the position transform from JS; must not have its own animation */
 .header-dog-wrapper {
   flex-shrink: 0;
+  position: relative;
+  z-index: 500; /* above photo cards (auto), below modal (1000) */
 }
 
 .header-dog {
