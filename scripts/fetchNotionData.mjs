@@ -91,11 +91,15 @@ async function fetchAllPages(databaseId) {
 }
 
 async function processPage(page) {
-  // Extract caption property (rich_text type)
-  const captionProp = page.properties?.caption ?? page.properties?.Caption;
+  // Extract page title property
+  const titleProp =
+    page.properties?.title ??
+    page.properties?.Title ??
+    page.properties?.['이름'] ??
+    page.properties?.['Name'];
   let caption = '';
-  if (captionProp?.type === 'rich_text' && captionProp.rich_text.length > 0) {
-    caption = captionProp.rich_text.map((t) => t.plain_text).join('');
+  if (titleProp?.type === 'title' && titleProp.title.length > 0) {
+    caption = titleProp.title.map((t) => t.plain_text).join('');
   }
 
   // Find the first image block in the page body
