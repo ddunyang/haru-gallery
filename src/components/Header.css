@@ -1,6 +1,13 @@
 .header {
   background: var(--color-dark);
   padding: 0;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.header:active {
+  cursor: grabbing;
 }
 
 .header-inner {
@@ -29,11 +36,106 @@
   gap: 0.6em;
 }
 
+/* Wrapper receives the position transform from JS; must not have its own animation */
+.header-dog-wrapper {
+  flex-shrink: 0;
+  position: relative;
+  z-index: 500; /* above photo cards (auto), below modal (1000) */
+}
+
 .header-dog {
   opacity: 0.85;
-  flex-shrink: 0;
+  display: block;
+}
+
+/* Wag in idle state */
+.header-dog--wag {
   animation: wag 2s ease-in-out infinite;
   transform-origin: center bottom;
+}
+
+/* Chewing bounce in eating state */
+.header-dog--eating {
+  animation: chew 0.35s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+/* Walking body bob */
+.header-dog--walking {
+  animation: walk-bob 0.45s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+/* Running body bob */
+.header-dog--running {
+  animation: run-bob 0.25s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+/* Leg pivot settings (SVG fill-box so transform-origin is relative to the element) */
+.header-dog--walking .dog-leg-left,
+.header-dog--walking .dog-leg-right,
+.header-dog--running .dog-leg-left,
+.header-dog--running .dog-leg-right {
+  transform-box: fill-box;
+  transform-origin: top center;
+}
+
+/* Alternating leg swing for walking */
+.header-dog--walking .dog-leg-left {
+  animation: leg-swing 0.45s ease-in-out infinite;
+}
+.header-dog--walking .dog-leg-right {
+  animation: leg-swing 0.45s ease-in-out infinite reverse;
+}
+
+/* Alternating leg swing for running (bigger, faster) */
+.header-dog--running .dog-leg-left {
+  animation: leg-run 0.25s ease-in-out infinite;
+}
+.header-dog--running .dog-leg-right {
+  animation: leg-run 0.25s ease-in-out infinite reverse;
+}
+
+@keyframes wag {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes chew {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-6px) rotate(1deg); }
+}
+
+@keyframes walk-bob {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-4px) rotate(1deg); }
+}
+
+@keyframes run-bob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-7px) rotate(2deg); }
+}
+
+@keyframes leg-swing {
+  0%, 100% { transform: rotate(-18deg); }
+  50% { transform: rotate(18deg); }
+}
+
+@keyframes leg-run {
+  0%, 100% { transform: rotate(-28deg); }
+  50% { transform: rotate(28deg); }
+}
+
+/* Treat bone that follows the cursor */
+.dog-treat {
+  animation: treat-float 0.55s ease-in-out infinite;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.25));
+}
+
+@keyframes treat-float {
+  0%, 100% { transform: translate(-50%, -50%) rotate(-6deg) scale(1); }
+  50%       { transform: translate(-50%, -62%) rotate(6deg) scale(1.08); }
 }
 
 .header-title {
