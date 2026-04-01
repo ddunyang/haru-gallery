@@ -56,6 +56,26 @@
   font-weight: 400;
   color: rgba(255, 230, 210, 0.85);
   line-height: 1.5;
+  flex: 1;
+}
+
+.medical-record-dday {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #ffd166;
+  background: rgba(255, 209, 102, 0.18);
+  border: 1.5px solid rgba(255, 209, 102, 0.6);
+  border-radius: 5px;
+  padding: 0.15em 0.55em;
+  align-self: center;
+}
+
+.medical-record-dday--urgent {
+  color: #ff6b4a;
+  background: rgba(255, 107, 74, 0.18);
+  border-color: rgba(255, 107, 74, 0.7);
 }
 
 @media (max-width: 480px) {
