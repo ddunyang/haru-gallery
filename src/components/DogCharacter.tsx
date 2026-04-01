@@ -125,9 +125,9 @@ function DogCharacter({ size = 110, className, expression = 'neutral' }: DogChar
         />
       )}
       {/* Left front leg */}
-      <rect x="72" y="178" width="17" height="18" rx="8" fill="#F5EFE2" />
+      <rect className="dog-leg-left" x="72" y="178" width="17" height="18" rx="8" fill="#F5EFE2" />
       {/* Right front leg */}
-      <rect x="111" y="178" width="17" height="18" rx="8" fill="#F5EFE2" />
+      <rect className="dog-leg-right" x="111" y="178" width="17" height="18" rx="8" fill="#F5EFE2" />
     </svg>
   );
 }

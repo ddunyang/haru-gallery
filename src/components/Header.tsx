@@ -12,6 +12,7 @@ const REACH_THRESHOLD = 38; // px – distance at which dog "catches" the treat
 function Header() {
   const [expression, setExpression] = useState<DogExpression>('neutral');
   const [treatPos, setTreatPos] = useState<{ x: number; y: number } | null>(null);
+  const [motion, setMotion] = useState<'idle' | 'walking' | 'running'>('idle');
 
   const dogWrapperRef = useRef<HTMLDivElement>(null);
 
@@ -24,13 +25,16 @@ function Header() {
     dragging: false,
     raf: 0,
     eatTimer: null as ReturnType<typeof setTimeout> | null,
+    facingLeft: false,
+    prevMotion: 'idle' as 'idle' | 'walking' | 'running',
   });
 
   /** Apply pixel offset to the dog wrapper via direct DOM mutation (no re-render) */
   const applyOffset = useCallback((ox: number, oy: number) => {
     s.current.offset = { x: ox, y: oy };
     if (dogWrapperRef.current) {
-      dogWrapperRef.current.style.transform = `translate(${ox}px, ${oy}px)`;
+      const scaleX = s.current.facingLeft ? -1 : 1;
+      dogWrapperRef.current.style.transform = `translate(${ox}px, ${oy}px) scaleX(${scaleX})`;
     }
   }, []);
 
@@ -39,11 +43,16 @@ function Header() {
     const { x, y } = s.current.offset;
     const dist = Math.sqrt(x * x + y * y);
     if (dist < 0.5) {
+      s.current.facingLeft = false;
       applyOffset(0, 0);
       s.current.state = 'idle';
+      s.current.prevMotion = 'idle';
       setExpression('neutral');
+      setMotion('idle');
       return;
     }
+    // Face toward home (origin) while returning
+    if (Math.abs(x) > 1) s.current.facingLeft = x > 0;
     const step = Math.min(RETURN_SPEED, dist);
     applyOffset(x - (x / dist) * step, y - (y / dist) * step);
     s.current.raf = requestAnimationFrame(doReturn);
@@ -59,17 +68,32 @@ function Header() {
     const dy = treatTarget.y - (naturalPos.y + offset.y);
     const dist = Math.sqrt(dx * dx + dy * dy);
 
+    // Update facing direction based on horizontal movement
+    if (Math.abs(dx) > 1) s.current.facingLeft = dx < 0;
+
+    // Update motion: run when far away, walk when close
+    const newMotion: 'walking' | 'running' = dist > 80 ? 'running' : 'walking';
+    if (newMotion !== s.current.prevMotion) {
+      s.current.prevMotion = newMotion;
+      setMotion(newMotion);
+    }
+
     if (dist < REACH_THRESHOLD) {
       // Dog caught the treat!
       s.current.state = 'eating';
       s.current.dragging = false;
+      s.current.facingLeft = false;
+      s.current.prevMotion = 'idle';
       setExpression('eating');
+      setMotion('idle');
       setTreatPos(null);
       s.current.treatTarget = null;
 
       s.current.eatTimer = setTimeout(() => {
         s.current.state = 'returning';
+        s.current.prevMotion = 'walking';
         setExpression('neutral');
+        setMotion('walking');
         s.current.raf = requestAnimationFrame(doReturn);
       }, 2500);
       return;
@@ -123,7 +147,9 @@ function Header() {
       setTreatPos(null);
       s.current.treatTarget = null;
       s.current.state = 'returning';
+      s.current.prevMotion = 'walking';
       setExpression('sad');
+      setMotion('walking');
       s.current.raf = requestAnimationFrame(doReturn);
     }
   }, [doReturn]);
@@ -154,8 +180,10 @@ function Header() {
 
   const dogClassName = [
     'header-dog',
-    expression === 'neutral' ? 'header-dog--wag' : '',
+    expression === 'neutral' && motion === 'idle' ? 'header-dog--wag' : '',
     expression === 'eating' ? 'header-dog--eating' : '',
+    motion === 'walking' ? 'header-dog--walking' : '',
+    motion === 'running' ? 'header-dog--running' : '',
   ]
     .filter(Boolean)
     .join(' ');

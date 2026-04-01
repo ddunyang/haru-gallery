@@ -58,6 +58,43 @@
   transform-origin: center bottom;
 }
 
+/* Walking body bob */
+.header-dog--walking {
+  animation: walk-bob 0.45s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+/* Running body bob */
+.header-dog--running {
+  animation: run-bob 0.25s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+/* Leg pivot settings (SVG fill-box so transform-origin is relative to the element) */
+.header-dog--walking .dog-leg-left,
+.header-dog--walking .dog-leg-right,
+.header-dog--running .dog-leg-left,
+.header-dog--running .dog-leg-right {
+  transform-box: fill-box;
+  transform-origin: top center;
+}
+
+/* Alternating leg swing for walking */
+.header-dog--walking .dog-leg-left {
+  animation: leg-swing 0.45s ease-in-out infinite;
+}
+.header-dog--walking .dog-leg-right {
+  animation: leg-swing 0.45s ease-in-out infinite reverse;
+}
+
+/* Alternating leg swing for running (bigger, faster) */
+.header-dog--running .dog-leg-left {
+  animation: leg-run 0.25s ease-in-out infinite;
+}
+.header-dog--running .dog-leg-right {
+  animation: leg-run 0.25s ease-in-out infinite reverse;
+}
+
 @keyframes wag {
   0%, 100% { transform: rotate(-3deg); }
   50% { transform: rotate(3deg); }
@@ -66,6 +103,26 @@
 @keyframes chew {
   0%, 100% { transform: translateY(0) rotate(-1deg); }
   50% { transform: translateY(-6px) rotate(1deg); }
+}
+
+@keyframes walk-bob {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-4px) rotate(1deg); }
+}
+
+@keyframes run-bob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-7px) rotate(2deg); }
+}
+
+@keyframes leg-swing {
+  0%, 100% { transform: rotate(-18deg); }
+  50% { transform: rotate(18deg); }
+}
+
+@keyframes leg-run {
+  0%, 100% { transform: rotate(-28deg); }
+  50% { transform: rotate(28deg); }
 }
 
 /* Treat bone that follows the cursor */
