@@ -11,6 +11,17 @@ function formatDate(dateStr: string): string {
   return `${year}.${month}.${day}`;
 }
 
+function calcDDay(dateStr: string): number | null {
+  if (!dateStr) return null;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const target = new Date(dateStr);
+  target.setHours(0, 0, 0, 0);
+  const diffMs = target.getTime() - today.getTime();
+  const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+  return diffDays > 0 ? diffDays : null;
+}
+
 function MedicalRecords() {
   return (
     <section className="medical-records">
@@ -26,14 +37,22 @@ function MedicalRecords() {
           <EmptyState dark />
         ) : (
           <ul className="medical-record-list">
-            {medicalRecords.map((record) => (
-              <li key={record.id} className="medical-record-item">
-                <span className="medical-record-date">
-                  {formatDate(record.date)}
-                </span>
-                <span className="medical-record-title">{record.title}</span>
-              </li>
-            ))}
+            {medicalRecords.map((record) => {
+              const dday = calcDDay(record.date);
+              return (
+                <li key={record.id} className="medical-record-item">
+                  <span className="medical-record-date">
+                    {formatDate(record.date)}
+                  </span>
+                  <span className="medical-record-title">{record.title}</span>
+                  {dday !== null && (
+                    <span className={`medical-record-dday${dday <= 7 ? ' medical-record-dday--urgent' : ''}`}>
+                      D-{dday}
+                    </span>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         )}
       </div>
