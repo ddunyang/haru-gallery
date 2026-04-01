@@ -1,6 +1,13 @@
 .header {
   background: var(--color-dark);
   padding: 0;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.header:active {
+  cursor: grabbing;
 }
 
 .header-inner {
@@ -32,13 +39,6 @@
 /* Wrapper receives the position transform from JS; must not have its own animation */
 .header-dog-wrapper {
   flex-shrink: 0;
-  cursor: grab;
-  touch-action: none;
-  user-select: none;
-}
-
-.header-dog-wrapper:active {
-  cursor: grabbing;
 }
 
 .header-dog {

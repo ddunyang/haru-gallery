@@ -161,22 +161,21 @@ function Header() {
     .join(' ');
 
   return (
-    <header className="header">
+    <header
+      className="header"
+      onMouseDown={(e) => {
+        e.preventDefault();
+        onStart(e.clientX, e.clientY);
+      }}
+      onTouchStart={(e) => {
+        if (e.touches[0]) onStart(e.touches[0].clientX, e.touches[0].clientY);
+      }}
+    >
       <div className="header-inner">
         <span className="header-eyebrow">Haru's Daily Life</span>
         <div className="header-title-row">
           {/* Outer div handles position; inner SVG handles expression animations */}
-          <div
-            ref={dogWrapperRef}
-            className="header-dog-wrapper"
-            onMouseDown={(e) => {
-              e.preventDefault();
-              onStart(e.clientX, e.clientY);
-            }}
-            onTouchStart={(e) => {
-              if (e.touches[0]) onStart(e.touches[0].clientX, e.touches[0].clientY);
-            }}
-          >
+          <div ref={dogWrapperRef} className="header-dog-wrapper">
             <DogCharacter className={dogClassName} size={84} expression={expression} />
           </div>
           <h1 className="header-title">하루 일상</h1>
