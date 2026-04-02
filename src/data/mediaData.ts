@@ -29,3 +29,17 @@ export interface MedicalRecord {
 
 export const medicalRecords: MedicalRecord[] = [];
 
+// ============================================================
+// ⚖️ 체중 기록 등록 방법
+//   Notion DB (335fb4c819b38066beb0ffcb222759bd)에서 자동으로 불러옵니다.
+//   date(날짜)와 kg(체중) 필드를 사용합니다.
+// ============================================================
+
+export interface WeightRecord {
+  id: string;
+  date: string;
+  kg: number;
+}
+
+export const weightRecords: WeightRecord[] = [];
+
