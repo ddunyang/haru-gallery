@@ -1,0 +1,119 @@
+.weight-chart-section {
+  background: var(--color-dark);
+  padding: 5rem 2.5rem 4rem;
+}
+
+.weight-chart-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Override shared section-header colors for dark background */
+.weight-chart-section .section-label {
+  color: rgba(255, 230, 210, 0.45);
+}
+
+.weight-chart-section .section-line {
+  background: rgba(255, 220, 190, 0.15);
+}
+
+.weight-chart-section .section-count {
+  color: rgba(255, 230, 210, 0.45);
+}
+
+/* Summary cards */
+.weight-summary-cards {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.weight-summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: rgba(255, 220, 190, 0.07);
+  border: 1px solid rgba(255, 220, 190, 0.15);
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  min-width: 110px;
+}
+
+.weight-summary-card--current {
+  background: rgba(255, 184, 120, 0.12);
+  border-color: rgba(255, 184, 120, 0.35);
+}
+
+.weight-summary-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 230, 210, 0.4);
+}
+
+.weight-summary-value {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: rgba(255, 230, 210, 0.9);
+  line-height: 1.2;
+}
+
+.weight-summary-card--current .weight-summary-value {
+  color: #ffb878;
+}
+
+.weight-summary-date {
+  font-size: 0.7rem;
+  color: rgba(255, 230, 210, 0.35);
+  letter-spacing: 0.05em;
+}
+
+.weight-summary-arrow {
+  font-size: 1.2rem;
+  color: rgba(255, 220, 190, 0.3);
+}
+
+/* Chart container */
+.weight-chart-wrap {
+  width: 100%;
+}
+
+/* Custom tooltip */
+.weight-chart-tooltip {
+  background: rgba(60, 35, 20, 0.92);
+  border: 1px solid rgba(255, 184, 120, 0.35);
+  border-radius: 8px;
+  padding: 0.5rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.weight-chart-tooltip-date {
+  font-size: 0.7rem;
+  color: rgba(255, 230, 210, 0.5);
+  letter-spacing: 0.05em;
+}
+
+.weight-chart-tooltip-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffb878;
+}
+
+@media (max-width: 480px) {
+  .weight-summary-cards {
+    gap: 0.75rem;
+  }
+
+  .weight-summary-card {
+    padding: 0.75rem 1rem;
+    min-width: 90px;
+  }
+
+  .weight-summary-value {
+    font-size: 1.2rem;
+  }
+}
