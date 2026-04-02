@@ -1,6 +1,7 @@
 import './WeightChart.css';
 import { weightRecords } from '../data/mediaData';
 import EmptyState from './EmptyState';
+import { formatDate } from '../utils/date';
 import {
   LineChart,
   Line,
@@ -12,15 +13,6 @@ import {
   ReferenceLine,
   Dot,
 } from 'recharts';
-
-function formatDate(dateStr: string): string {
-  if (!dateStr) return '';
-  const [year, month, day] = dateStr.split('-');
-  if (!year) return dateStr;
-  if (!month) return year;
-  if (!day) return `${year}.${month}`;
-  return `${year}.${month}.${day}`;
-}
 
 interface TooltipPayload {
   value: number;

@@ -5,6 +5,7 @@
 :root {
   --color-bg: #fffcf8;
   --color-dark: #8c6352;
+  --color-darker: #3d2518;
   --color-text: #4d3b30;
   --color-text-muted: #b09080;
   --grid-gap-flush: 3px;

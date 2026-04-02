@@ -1,15 +1,7 @@
 import './MedicalRecords.css';
 import { medicalRecords } from '../data/mediaData';
 import EmptyState from './EmptyState';
-
-function formatDate(dateStr: string): string {
-  if (!dateStr) return '';
-  const [year, month, day] = dateStr.split('-');
-  if (!year) return dateStr;
-  if (!month) return `${year}`;
-  if (!day) return `${year}.${month}`;
-  return `${year}.${month}.${day}`;
-}
+import { formatDate } from '../utils/date';
 
 function calcDDay(dateStr: string): number | null {
   if (!dateStr) return null;

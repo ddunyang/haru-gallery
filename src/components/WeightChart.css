@@ -1,5 +1,5 @@
 .weight-chart-section {
-  background: #3d2518;
+  background: var(--color-darker);
   padding: 5rem 2.5rem 4rem;
 }
 

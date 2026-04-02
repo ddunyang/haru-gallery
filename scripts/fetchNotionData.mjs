@@ -4,6 +4,7 @@
 //   NOTION_TOKEN          — Notion Internal Integration Secret
 //   NOTION_PHOTO_DB_ID    — (optional) Notion photo database ID
 //   NOTION_MEDICAL_DB_ID  — (optional) Notion medical records database ID
+//   NOTION_WEIGHT_DB_ID   — (optional) Notion weight database ID
 
 import { Client } from '@notionhq/client';
 import { writeFileSync, mkdirSync, existsSync } from 'fs';
