@@ -97,7 +97,7 @@ function WeightChart() {
 
         <div className="weight-summary-cards">
           <div className="weight-summary-card">
-            <span className="weight-summary-label">태어날 때</span>
+            <span className="weight-summary-label">첫 기록</span>
             <span className="weight-summary-value">{first.kg} kg</span>
             <span className="weight-summary-date">{formatDate(first.date)}</span>
           </div>
@@ -133,7 +133,7 @@ function WeightChart() {
                 tickLine={false}
                 width={44}
               />
-              <Tooltip content={<CustomTooltip />} cursor={{ stroke: 'rgba(255,200,150,0.2)' }} />
+              <Tooltip content={<CustomTooltip />} cursor={{ stroke: 'rgba(255,200,150,0.2)' }} isAnimationActive={false} />
               <ReferenceLine
                 y={last.kg}
                 stroke="rgba(255,184,120,0.25)"
